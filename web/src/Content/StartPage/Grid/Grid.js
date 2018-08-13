@@ -18,7 +18,7 @@ const ContentTeaser = ({ titel, text }) => (
 	</Card>
 );
 
-class ContentGrid extends Component {
+class Grid extends Component {
 	render() {
 		return (
 			<Row style={rowStyle}>
@@ -66,4 +66,4 @@ class ContentGrid extends Component {
 	}
 }
 
-export default ContentGrid;
+export default Grid;

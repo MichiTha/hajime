@@ -1,18 +1,20 @@
 import './App.css';
 
 import React, { Component } from 'react';
-import Navigation from './navigation/Navigation';
-import Stage from './stage/Stage';
-import ContentGrid from './contentGrid/ContentGrid';
+import { Layout } from 'antd';
+
+import Header from './Header/Header';
+import Content from './Content/Content';
+import Footer from './Footer/Footer';
 
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
-				<Navigation />
-				<Stage />
-				<ContentGrid />
-			</div>
+			<Layout className="App">
+				<Header />
+				<Content />
+				<Footer />
+			</Layout>
 		);
 	}
 }
