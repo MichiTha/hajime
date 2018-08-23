@@ -1,0 +1,6 @@
+
+.ant-layout-content {
+  min-height: 80vh;
+  width: 100vw;
+  position: relative;
+}

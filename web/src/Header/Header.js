@@ -1,10 +1,18 @@
 import './Header.css';
 
 import React, { Component } from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 class Header extends Component {
 	render() {
+		const { data } = this.props;
+		let pages = [];
+		if (data && data.pages) {
+			pages = data.pages.edges.map(edge => edge.node);
+		}
 		return (
 			<Layout.Header>
 				<div className="Logo-blue" />
@@ -13,23 +21,33 @@ class Header extends Component {
 					defaultSelectedKeys={['1']}
 					style={{ lineHeight: '80px' }}
 				>
-					<Menu.Item key="1">Neuigkeiten</Menu.Item>
-					<Menu.Item key="2">Termine</Menu.Item>
-					<Menu.SubMenu key="3" title="Informationen" className="Menu-item">
-						<Menu.Item>Termine</Menu.Item>
-						<Menu.Item>Orte</Menu.Item>
-					</Menu.SubMenu>
-					<Menu.Item key="4" style={{ float: 'right' }}>
-						<span>
-							<Icon type="team" />
-							Kontakt
-						</span>
+					<Menu.Item key="1">
+						<NavLink to={`/`} className="nav-text">
+							Neuigkeiten
+						</NavLink>
 					</Menu.Item>
-					<Menu.Item key="5" style={{ float: 'right' }}>
-						<span>
-							<Icon type="search" />
-							Suche
-						</span>
+					{pages.map(({ uri, title }, index) => (
+						<Menu.Item key={`${index + 3}`}>
+							<NavLink to={`/${uri}`} className="nav-text">
+								{title}
+							</NavLink>
+						</Menu.Item>
+					))}
+					<Menu.Item key="2" style={{ float: 'right' }}>
+						<NavLink to={`/kontakt`} className="nav-text">
+							<span>
+								<Icon type="team" />
+								Kontakt
+							</span>
+						</NavLink>
+					</Menu.Item>
+					<Menu.Item key="3" style={{ float: 'right' }}>
+						<NavLink to={`/suche`} className="nav-text">
+							<span>
+								<Icon type="search" />
+								Suche
+							</span>
+						</NavLink>
 					</Menu.Item>
 				</Menu>
 			</Layout.Header>
@@ -37,4 +55,28 @@ class Header extends Component {
 	}
 }
 
-export default Header;
+class HeaderRenderer extends Component {
+	render() {
+		return (
+			<Query
+				query={gql`
+					query Pages {
+						pages {
+							edges {
+								node {
+									id
+									title
+									uri
+								}
+							}
+						}
+					}
+				`}
+			>
+				{({ loading, error, data }) => <Header data={data} />}
+			</Query>
+		);
+	}
+}
+
+export default HeaderRenderer;

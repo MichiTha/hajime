@@ -3,26 +3,7 @@ import { Carousel, Calendar, Card } from 'antd';
 import { Row, Col } from 'antd';
 
 import Timeline from './Side/Timeline';
-
-import example from './example.jpeg';
-
-const Image = ({ src }) => (
-	<div
-		style={{
-			width: '100%',
-			height: '70vh',
-			overflow: 'hidden'
-		}}
-	>
-		<img
-			src={src}
-			style={{
-				minWidth: '100%',
-				minHeight: '70vh'
-			}}
-		/>
-	</div>
-);
+import StageTeaser from './StageTeaser';
 
 const onPanelChange = (value, mode) => console.log(value, mode);
 
@@ -36,12 +17,21 @@ const colStyle = {
 	row: 0
 };
 
-class Stage extends Component {
+type Props = {
+	stagePost: {
+		title: string,
+		titleImage: string,
+		content: string
+	}
+};
+
+class Stage extends Component<Props, void> {
 	render() {
+		const { stagePost } = this.props;
 		return (
 			<Row gutter={24} style={rowStyle}>
 				<Col sm={24} md={18} style={colStyle}>
-					<Image src={example} />
+					<StageTeaser stagePost={stagePost} />
 				</Col>
 				<Col sm={24} md={6} style={colStyle}>
 					<Timeline />
