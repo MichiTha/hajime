@@ -1,5 +1,11 @@
-import ApolloClient from 'apollo-boost';
+import { ApolloLink } from 'apollo-link';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
 
 export const client = new ApolloClient({
-	uri: 'http://judoverein-ammerland-muensing.de/graphql'
+	link: new HttpLink({
+		uri: 'http://judoverein-ammerland-muensing.de/graphql'
+	}),
+	cache: new InMemoryCache()
 });

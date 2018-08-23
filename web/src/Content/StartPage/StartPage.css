@@ -1,3 +1,23 @@
 .stageTeaserContainer {
   position: relative;
 }
+
+.stageTeaserTitle {
+  position: absolute;
+  left: 10%;
+  bottom: 10%;
+  color: white;
+  font-size: 50px;
+  line-height: 59px;
+  text-shadow: 2px 2px 7px rgba(0,0,0,.8);
+}
+
+.ant-row {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.ant-col {
+  padding: 0 !important;
+  margin: 0 !important;
+}

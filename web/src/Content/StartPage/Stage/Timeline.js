@@ -31,12 +31,15 @@ class SideTimeline extends Component<void, Stat> {
 
 	render() {
 		const { events } = this.state;
-		console.log('events: ', events);
 		return (
 			<Card title="Nächste Termine" style={{ height: '35vh' }}>
 				<Timeline>
-					{events.map(({ begin, summary }) => (
-						<TimeSlot begin={begin} summary={summary} />
+					{events.map(({ begin, summary }, index) => (
+						<TimeSlot
+							key={`time-slot-${index}`}
+							begin={begin}
+							summary={summary}
+						/>
 					))}
 				</Timeline>
 			</Card>

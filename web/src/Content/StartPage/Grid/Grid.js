@@ -5,16 +5,6 @@ import { Row, Col } from 'antd';
 
 const { Meta } = Card;
 
-const rowStyle = {
-	padding: 0,
-	row: 0
-};
-
-const colStyle = {
-	padding: 0,
-	row: 0
-};
-
 const ContentTeaser = ({ titel, titleImage, text }) =>
 	titleImage ? (
 		<Card
@@ -61,9 +51,9 @@ class Grid extends Component {
 	render() {
 		const { contentPosts } = this.props;
 		return (
-			<Row style={rowStyle}>
+			<Row>
 				{contentPosts.map(({ id, title, titleImage, text }) => (
-					<Col sm={24} md={8} style={colStyle} key={id}>
+					<Col sm={24} md={8} key={id}>
 						<Link to={`post/${id}`}>
 							<ContentTeaser
 								titel={title}
