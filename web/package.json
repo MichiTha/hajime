@@ -2,7 +2,7 @@
 	"name": "web",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "http://michitha.github.io/hajime",
+	"homepage": "https://michitha.github.io/hajime",
 	"dependencies": {
 		"antd": "^3.8.0",
 		"apollo-boost": "^0.1.14",
