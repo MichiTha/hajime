@@ -20,10 +20,13 @@ class StageTeaser extends Component<Props, void> {
 				<div
 					className="stageTeaserContainer"
 					style={{
+						borderRadius: '20px',
+						margin: '5px',
+						boxShadow: '0 2px 4px 0 rgba(0,0,0,.5)',
 						backgroundImage: `url(${titleImage})`,
 						backgroundPosition: 'center top',
 						backgroundSize: 'cover',
-						height: '70vh'
+						height: 'calc(100vh - 382px)'
 					}}
 				>
 					<h1 className="stageTeaserTitle">{title}</h1>

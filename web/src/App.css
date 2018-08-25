@@ -3,6 +3,10 @@
   --color-yellow: rgb(255, 226, 13);
 }
 
+body {
+  background-color: var(--color-blue);
+}
+
 .Logo-blue {
   background-image: url("./assets/jvam-logo-optimal-blue.png");
   background-size: 60px 60px;

@@ -11,5 +11,9 @@ export const extractTitleImage = (content: string) => {
 export const removeHTML = (html: string) => {
 	const tmp = document.createElement('DIV');
 	tmp.innerHTML = html;
-	return tmp.textContent || tmp.innerText || '';
+	let text = tmp.textContent || tmp.innerText || '';
+	if (text.startsWith('NEU – ')) {
+		text = text.replace('NEU – ', '');
+	}
+	return text;
 };

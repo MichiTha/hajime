@@ -3,4 +3,6 @@
   min-height: 80vh;
   width: 100vw;
   position: relative;
+  background-color: var(--color-yellow);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Timeline } from 'antd';
 import { Row, Col } from 'antd';
-import { getEvents } from './Ical';
+
+import { getCalendarEvents } from '../../../Utils/calendar';
 
 type State = {
 	events: Array<Object>
@@ -25,14 +26,27 @@ class SideTimeline extends Component<void, Stat> {
 	};
 
 	componentDidMount = async () => {
-		const events = await getEvents();
+		const calendarEvents = await getCalendarEvents();
+		console.log('events: ', calendarEvents);
+		const events = calendarEvents.map(event => ({
+			...event,
+			begin: new Date(event.start.dateTime)
+		}));
 		this.setState({ events });
 	};
 
 	render() {
 		const { events } = this.state;
 		return (
-			<Card title="Nächste Termine" style={{ height: '35vh' }}>
+			<Card
+				title="Termine"
+				style={{
+					borderRadius: '20px',
+					margin: '5px',
+					boxShadow: '0 2px 4px 0 rgba(0,0,0,.5)',
+					height: 'calc(65vh - 382px * 0.65)'
+				}}
+			>
 				<Timeline>
 					{events.map(({ begin, summary }, index) => (
 						<TimeSlot

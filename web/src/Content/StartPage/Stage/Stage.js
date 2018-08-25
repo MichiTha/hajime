@@ -30,11 +30,11 @@ class Stage extends Component<Props, void> {
 			categoryFilter
 		} = this.props;
 		return (
-			<Row gutter={24}>
-				<Col sm={24} md={18}>
+			<Row>
+				<Col sm={24} md={16}>
 					<StageTeaser stagePost={stagePost} />
 				</Col>
-				<Col sm={24} md={6}>
+				<Col sm={24} md={8}>
 					<Timeline />
 					<Categories
 						categories={categories}

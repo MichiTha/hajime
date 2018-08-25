@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import { Card } from 'antd';
+
 import Renderer from '../../Renderer/Renderer';
 // import { removeHTML, extractTitleImage } from '../../Utils/post';
 
@@ -27,7 +29,25 @@ class Page extends Component {
 				`}
 			>
 				{Renderer(transform)(({ content }) => (
-					<div dangerouslySetInnerHTML={{ __html: content }} />
+					<div
+						style={{
+							width: '100%',
+							display: 'flex',
+							justifyContent: 'center'
+						}}
+					>
+						<Card
+							style={{
+								margin: '5px',
+								boxShadow: '0 2px 4px 0 rgba(0,0,0,.5)',
+								maxWidth: '1200px',
+								minHeight: '80vh',
+								overflow: 'hidden'
+							}}
+						>
+							<div dangerouslySetInnerHTML={{ __html: content }} />{' '}
+						</Card>
+					</div>
 				))}
 			</Query>
 		);

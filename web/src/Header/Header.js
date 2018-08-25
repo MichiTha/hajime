@@ -6,12 +6,16 @@ import gql from 'graphql-tag';
 import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
+const NAV_FILTER = ['Startseite', 'Kontakt', 'Impressum und Datenschutz'];
+
 class Header extends Component {
 	render() {
 		const { data } = this.props;
 		let pages = [];
 		if (data && data.pages) {
-			pages = data.pages.edges.map(edge => edge.node);
+			pages = data.pages.edges
+				.map(edge => edge.node)
+				.filter(({ title }) => NAV_FILTER.indexOf(title) === -1);
 		}
 		return (
 			<Layout.Header>
@@ -23,7 +27,7 @@ class Header extends Component {
 				>
 					<Menu.Item key="1">
 						<NavLink to={`/`} className="nav-text">
-							Neuigkeiten
+							Startseite
 						</NavLink>
 					</Menu.Item>
 					{pages.map(({ uri, title }, index) => (

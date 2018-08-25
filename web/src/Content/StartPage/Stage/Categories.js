@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tag } from 'antd';
+import { Card, Tag } from 'antd';
 
 type Props = {
 	categories: Array<{
@@ -29,8 +29,15 @@ class Categories extends Component<Props, void> {
 		const { categories, categoryFilter } = this.props;
 		console.log('categoryFilter: ', categoryFilter);
 		return (
-			<div style={{ height: '35vh' }}>
-				<h4 style={{ marginBottom: 16 }}>Schlagwörter:</h4>
+			<Card
+				style={{
+					borderRadius: '20px',
+					margin: '5px',
+					boxShadow: '0 2px 4px 0 rgba(0,0,0,.5)',
+					height: 'calc(35vh - 382px * 0.35)'
+				}}
+				title="Schlagwörter"
+			>
 				{categories &&
 					categories.map(({ name, count, id, categoryId, children }) => {
 						const checked = this.isChecked(categoryId, categoryFilter);
@@ -45,7 +52,7 @@ class Categories extends Component<Props, void> {
 							</Tag>
 						);
 					})}
-			</div>
+			</Card>
 		);
 	}
 }

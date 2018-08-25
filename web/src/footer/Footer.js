@@ -19,47 +19,52 @@ const footerTextStyle = {
 class Footer extends Component {
 	render() {
 		return (
-			<Layout.Footer>
-				<footer>
-					<Row>
-						<Col sm={24} md={24}>
-							<ul style={footerListStyle}>
-								<a>
-									<li style={footerTextStyle}>Kontakt</li>
-								</a>
-								<a>
-									<li style={footerTextStyle}>Impressum</li>
-								</a>
-								<a>
-									<li style={footerTextStyle}>Datenschutz</li>
-								</a>
-							</ul>
-						</Col>
-					</Row>
-					<Divider />
-					<Row>
-						<Col sm={12} style={{ display: 'flex' }}>
-							<div className="Logo-blue" />
-						</Col>
-						<Col
-							sm={12}
-							style={{ display: 'flex', justifyContent: 'flex-end' }}
-						>
-							<Icon
-								style={{
-									fontSize: 60,
-									color: '#FFF',
-									marginTop: 10,
-									marginBottom: 10,
-									cursor: 'pointer'
-								}}
-								onClick={() => window.scrollTo(0, 0)}
-								type="up-circle-o"
-							/>
-						</Col>
-					</Row>
-				</footer>
-			</Layout.Footer>
+			<footer
+				style={{
+					padding: '24px',
+					height: '290px',
+					position: 'fixed',
+					bottom: 0,
+					left: 0,
+					right: 0,
+					background: 'var(--color-blue)'
+				}}
+			>
+				<Row>
+					<Col sm={24} md={24}>
+						<ul style={footerListStyle}>
+							<a>
+								<li style={footerTextStyle}>Kontakt</li>
+							</a>
+							<a>
+								<li style={footerTextStyle}>Impressum</li>
+							</a>
+							<a>
+								<li style={footerTextStyle}>Datenschutz</li>
+							</a>
+						</ul>
+					</Col>
+				</Row>
+				<Divider />
+				<Row>
+					<Col sm={12} style={{ display: 'flex' }}>
+						<div className="Logo-blue" />
+					</Col>
+					<Col sm={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+						<Icon
+							style={{
+								fontSize: 60,
+								color: '#FFF',
+								marginTop: 10,
+								marginBottom: 10,
+								cursor: 'pointer'
+							}}
+							onClick={() => window.scrollTo(0, 0)}
+							type="up-circle-o"
+						/>
+					</Col>
+				</Row>
+			</footer>
 		);
 	}
 }

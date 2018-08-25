@@ -3,6 +3,7 @@ import './StartPage.css';
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Button } from 'antd';
 
 import Renderer from '../../Renderer/Renderer';
 import { removeHTML, extractTitleImage } from '../../Utils/post';
@@ -26,13 +27,16 @@ type StartPageData = {
 };
 
 const extractCategories = data => {
-	const categories = data.categories.edges.map(edge => edge.node);
-	categories.forEach(
-		({ children }) =>
-			children &&
-			children.edges.forEach(edge => edge && categories.push(edge.node))
-	);
+	const categories = data.categories.edges
+		.map(edge => edge.node)
+		.filter(({ name }) => name !== 'Uncategorized');
 	return categories;
+};
+
+const formatDate = dateString => {
+	const date = new Date(dateString);
+	return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+	// ` ${date.getHours()}:${date.getMinutes()} Uhr`;
 };
 
 const transform = (data: StartPageData) => {
@@ -42,6 +46,8 @@ const transform = (data: StartPageData) => {
 		titleImage:
 			(post.featuredImage && post.featuredImage.sourceUrl) ||
 			(post.content && extractTitleImage(post.content)),
+		text: removeHTML(post.content),
+		date: formatDate(post.date),
 		categories: extractCategories(post)
 	}));
 
@@ -59,68 +65,54 @@ const transform = (data: StartPageData) => {
 };
 
 type State = {
-	categoryFilter: Array<number>
+	categoryFilter: Array<number>,
+	posts: number
 };
 
 class StartPage extends Component<void, State> {
 	state = {
-		categoryFilter: []
+		categoryFilter: [],
+		posts: 25
 	};
 
 	setCategoryFilter = (categorieIds: Array<number>): void =>
 		this.setState({ categoryFilter: categorieIds });
 
+	handleOnClickMore = () => this.setState({ posts: this.state.posts + 10 });
+
 	render() {
-		const { categoryFilter } = this.state;
+		const { categoryFilter, posts } = this.state;
 		return (
 			<Query
-				variables={{ categoryFilter: categoryFilter }}
+				variables={{ categoryFilter: categoryFilter, posts }}
 				query={gql`
-					query StartPage($categoryFilter: [Int]) {
-						categories {
+					query StartPage($categoryFilter: [Int], $posts: Int!) {
+						categories(where: { shouldOutputInFlatList: true }) {
 							edges {
 								node {
 									id
 									categoryId
 									name
 									count
-									children {
-										edges {
-											node {
-												id
-												categoryId
-												name
-												count
-											}
-										}
-									}
 								}
 							}
 						}
-						posts(first: 25, where: { categoryIn: $categoryFilter }) {
+						posts(first: $posts, where: { categoryIn: $categoryFilter }) {
 							edges {
 								node {
 									id
+									date
 									title
 									content
 									featuredImage {
 										sourceUrl
 									}
-									categories {
+									categories(where: { shouldOutputInFlatList: true }) {
 										edges {
 											node {
 												id
 												name
 												count
-												children {
-													edges {
-														node {
-															id
-															name
-															count
-														}
-													}
-												}
 											}
 										}
 									}
@@ -139,6 +131,18 @@ class StartPage extends Component<void, State> {
 							categoryFilter={categoryFilter}
 						/>
 						<Grid contentPosts={contentPosts} />
+						<Button
+							onClick={this.handleOnClickMore}
+							style={{
+								height: '100px',
+								width: 'calc(100% - 10px)',
+								margin: '5px',
+								borderRadius: '20px',
+								boxShadow: '0 2px 4px 0 rgba(0,0,0,.5)'
+							}}
+						>
+							Mehr
+						</Button>
 					</React.Fragment>
 				))}
 			</Query>

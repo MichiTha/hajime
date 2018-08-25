@@ -13,9 +13,14 @@ class App extends Component {
 		return (
 			<Provider>
 				<Layout className="App">
+					<Footer />
 					<Header />
 					<Content />
-					<Footer />
+					<div
+						style={{
+							height: '290px'
+						}}
+					/>
 				</Layout>
 			</Provider>
 		);
