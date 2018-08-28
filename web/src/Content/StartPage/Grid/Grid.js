@@ -14,6 +14,7 @@ const ContentTeaser = ({ titel, titleImage, text, categories, date }) => {
 		categories
 			.reduce((acc, categorie) => `${acc}${categorie.name} | `, '')
 			.slice(0, -3);
+
 	return titleImage ? (
 		<Card
 			hoverable

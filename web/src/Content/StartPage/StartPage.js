@@ -7,6 +7,7 @@ import { Button } from 'antd';
 
 import Renderer from '../../Renderer/Renderer';
 import { removeHTML, extractTitleImage } from '../../Utils/post';
+import { formatDate } from '../../Utils/calendar';
 import Stage from './Stage/Stage';
 import Grid from './Grid/Grid';
 
@@ -31,12 +32,6 @@ const extractCategories = data => {
 		.map(edge => edge.node)
 		.filter(({ name }) => name !== 'Uncategorized');
 	return categories;
-};
-
-const formatDate = dateString => {
-	const date = new Date(dateString);
-	return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-	// ` ${date.getHours()}:${date.getMinutes()} Uhr`;
 };
 
 const transform = (data: StartPageData) => {

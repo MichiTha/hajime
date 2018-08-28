@@ -1,42 +1,59 @@
 import React, { Component } from 'react';
 import { Card, Timeline } from 'antd';
 import { Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 
-import { getCalendarEvents } from '../../../Utils/calendar';
+import { getEventsPerDay } from '../../../Utils/calendar';
 
 type State = {
-	events: Array<Object>
+	days: Array<Object>
 };
 
-const TimeSlot = ({ begin, summary }) => {
-	const minutes = begin.getMinutes();
-	const hours = begin.getHours();
-	const day = begin.getDate();
-	const month = begin.getMonth() + 1;
-	const year = begin.getFullYear();
+const TimeSlot = ({ day }) => {
+	console.log('day: ', day);
+	const { events } = day;
 	return (
-		<Timeline.Item
-		>{`${day}.${month}.${year} ${hours}:${minutes} - ${summary}`}</Timeline.Item>
+		<Timeline.Item>
+			<p>{day.day}</p>
+			{events.map((event, index) => {
+				console.log('event: ', event);
+
+				const { summary, location, start, id } = event;
+				const begin = new Date(start.dateTime);
+				let minutes = begin.getMinutes();
+				if (minutes < 10) {
+					minutes = `0${minutes}`;
+				}
+				let hours = begin.getHours();
+				if (hours < 10) {
+					hours = `0${hours}`;
+				}
+				const day = begin.getDate();
+				const month = begin.getMonth() + 1;
+				const year = begin.getFullYear();
+				return (
+					<Link to={`termin/${id}`} key={`event_${id}`}>
+						<p>{`${hours}:${minutes} ${summary}`}</p>{' '}
+					</Link>
+				);
+			})}
+		</Timeline.Item>
 	);
 };
 
 class SideTimeline extends Component<void, Stat> {
 	state = {
-		events: []
+		days: []
 	};
 
 	componentDidMount = async () => {
-		const calendarEvents = await getCalendarEvents();
-		console.log('events: ', calendarEvents);
-		const events = calendarEvents.map(event => ({
-			...event,
-			begin: new Date(event.start.dateTime)
-		}));
-		this.setState({ events });
+		const days = await getEventsPerDay();
+		console.log('days:', days);
+		this.setState({ days });
 	};
 
 	render() {
-		const { events } = this.state;
+		const { days } = this.state;
 		return (
 			<Card
 				title="Termine"
@@ -44,16 +61,18 @@ class SideTimeline extends Component<void, Stat> {
 					borderRadius: '20px',
 					margin: '5px',
 					boxShadow: '0 2px 4px 0 rgba(0,0,0,.5)',
-					height: 'calc(65vh - 382px * 0.65)'
+					height: 'calc(65vh - 382px * 0.65)',
+					overflow: 'hidden'
+				}}
+				bodyStyle={{
+					overflow: 'scroll',
+					padding: '10px',
+					height: '100%'
 				}}
 			>
 				<Timeline>
-					{events.map(({ begin, summary }, index) => (
-						<TimeSlot
-							key={`time-slot-${index}`}
-							begin={begin}
-							summary={summary}
-						/>
+					{days.map((day, index) => (
+						<TimeSlot key={`time-slot-${index}`} day={day} />
 					))}
 				</Timeline>
 			</Card>
