@@ -1,7 +1,7 @@
 import './Content.css';
 
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import StartPage from './StartPage/StartPage';

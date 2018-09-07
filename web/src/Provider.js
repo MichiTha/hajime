@@ -10,7 +10,7 @@ type Props = {
 
 const Provider = (props: Props) => (
 	<ApolloProvider client={client}>
-		<Router>{props.children}</Router>
+		<Router basename="/hajime">{props.children}</Router>
 	</ApolloProvider>
 );
 
