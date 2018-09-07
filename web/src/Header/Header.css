@@ -1,12 +1,12 @@
 .App::before {
   content: "";
   position: relative;
-  height: 80px;
+  height: 100px;
 }
 
 .ant-layout-header {
   background: var(--color-blue);
-  height: 80px;
+  height: 100px;
   padding: 0px;
   position: fixed;
   z-index: 2;
@@ -16,28 +16,27 @@
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
 }
 
-.ant-menu {
+.ant-menu,
+.ant-menu-horizontal {
   background-color: var(--color-blue);
   border-bottom: 0px;
 }
 
-.ant-menu-item, .ant-menu-submenu-title {
-  color: white;
-  border-bottom: 0px;
-}
-
-.ant-menu-horizontal {
-  border-bottom: 0px;
-}
-
+.ant-menu-item,
+.ant-menu-submenu-title,
 .ant-menu-item-selected,
 .ant-menu-item-active,
 .ant-menu-submenu-selected,
 .ant-menu-submenu-active,
-.ant-menu-submenu-open  {
+.ant-menu-submenu-open {
   color: white !important;
   font-weight: bold;
+  font-size: 15px;
   border-bottom: 0px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .nav-text {

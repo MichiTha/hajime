@@ -1,0 +1,16 @@
+.Timeline-Container::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url("../../../assets/jvam-logo.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  opacity: 0.2;
+  width: 100%;
+  margin: 10px;
+  float: left;
+}

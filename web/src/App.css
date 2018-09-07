@@ -8,10 +8,10 @@ body {
 }
 
 .Logo-blue {
-  background-image: url("./assets/jvam-logo-optimal-blue.png");
-  background-size: 60px 60px;
-  height: 60px;
-  width: 60px;
+  background-image: url("./assets/jvam-logo.svg");
+  background-size: 80px 80px;
+  height: 80px;
+  width: 80px;
   margin: 10px;
   float: left;
 }

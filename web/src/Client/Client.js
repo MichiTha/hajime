@@ -5,7 +5,7 @@ import { HttpLink } from 'apollo-link-http';
 
 export const client = new ApolloClient({
 	link: new HttpLink({
-		uri: 'http://judoverein-ammerland-muensing.de/graphql'
+		uri: 'https://judoverein-ammerland-muensing.de/graphql'
 	}),
 	cache: new InMemoryCache()
 });

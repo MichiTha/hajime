@@ -1,3 +1,5 @@
+import './Timeline.css';
+
 import React, { Component } from 'react';
 import { Card, Timeline } from 'antd';
 import { Row, Col } from 'antd';
@@ -70,11 +72,13 @@ class SideTimeline extends Component<void, Stat> {
 					height: '100%'
 				}}
 			>
-				<Timeline>
-					{days.map((day, index) => (
-						<TimeSlot key={`time-slot-${index}`} day={day} />
-					))}
-				</Timeline>
+				<div className="Timeline-Container">
+					<Timeline>
+						{days.map((day, index) => (
+							<TimeSlot key={`time-slot-${index}`} day={day} />
+						))}
+					</Timeline>
+				</div>
 			</Card>
 		);
 	}
